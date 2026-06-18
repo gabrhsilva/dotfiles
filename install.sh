@@ -1,16 +1,29 @@
 #!/bin/bash
-set -e
 
-DOTFILES="$HOME/dotfiles"
+set -euo pipefail
+
+DOTFILES="$(cd "$(dirname "$0")" && pwd)"
 
 echo "🚀 Starting dotfiles bootstrap..."
+echo "📂 Dotfiles directory: $DOTFILES"
+
+# ----------------------------
+# Dependencies
+# ----------------------------
+for cmd in git stow curl zsh; do
+  command -v "$cmd" >/dev/null 2>&1 || {
+    echo "❌ Missing dependency: $cmd"
+    exit 1
+  }
+done
 
 # ----------------------------
 # Oh My Zsh
 # ----------------------------
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
   echo "📦 Installing Oh My Zsh..."
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+  RUNZSH=no CHSH=no sh -c \
+    "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
 ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
@@ -20,37 +33,36 @@ ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
 # ----------------------------
 echo "🔌 Installing Zsh plugins..."
 
-# Autosuggestions
-if [ ! -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ]; then
+[ -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ] || \
   git clone https://github.com/zsh-users/zsh-autosuggestions \
   "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
-fi
 
-# Syntax highlighting
-if [ ! -d "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" ]; then
+[ -d "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" ] || \
   git clone https://github.com/zsh-users/zsh-syntax-highlighting \
   "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
-fi
 
 # ----------------------------
-# Powerlevel10k theme
+# Powerlevel10k
 # ----------------------------
 echo "🎨 Installing Powerlevel10k..."
 
-if [ ! -d "$ZSH_CUSTOM/themes/powerlevel10k" ]; then
+[ -d "$ZSH_CUSTOM/themes/powerlevel10k" ] || \
   git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
   "$ZSH_CUSTOM/themes/powerlevel10k"
-fi
 
 # ----------------------------
 # Apply dotfiles with stow
 # ----------------------------
-echo "🔗 Applying dotfiles with stow..."
+echo "🔗 Applying dotfiles..."
 
 cd "$DOTFILES"
 
-stow zsh
-stow kitty
-stow p10k
+stow -R zsh
+stow -R p10k
+stow -R .config
 
-echo "✅ Done! Restart your terminal."
+[ -d git ] && stow -R git
+
+echo ""
+echo "✅ Installation complete!"
+echo "💡 Run: exec zsh"
