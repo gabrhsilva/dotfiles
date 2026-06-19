@@ -1,8 +1,6 @@
-# Path to your Oh My Zsh installation.
+# Path to Oh My Zsh installation
 export ZSH="$HOME/.oh-my-zsh"
 
-# NVM
+# NVM (Arch Linux: installed via AUR package nvm)
 export NVM_DIR="$HOME/.nvm"
-
-[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"
+[ -s "/usr/share/nvm/init-nvm.sh" ] && source "/usr/share/nvm/init-nvm.sh"
