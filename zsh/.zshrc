@@ -3,17 +3,21 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Load custom configuration
-source ~/dotfiles/zsh/exports.zsh
-source ~/dotfiles/zsh/plugins.zsh
-source ~/dotfiles/zsh/aliases.zsh
-source ~/dotfiles/zsh/functions.zsh
+DOTFILES="$HOME/.dotfiles"
 
-# Theme
+# Load exports (ZSH path, NVM, env vars)
+source "$DOTFILES/zsh/exports.zsh"
+
+# Theme and plugins (must be defined before sourcing OMZ)
 ZSH_THEME="powerlevel10k/powerlevel10k"
+source "$DOTFILES/zsh/plugins.zsh"
 
 # Load Oh My Zsh
-source $ZSH/oh-my-zsh.sh
+source "$ZSH/oh-my-zsh.sh"
+
+# Load custom configuration (after OMZ)
+source "$DOTFILES/zsh/aliases.zsh"
+source "$DOTFILES/zsh/functions.zsh"
 
 # Powerlevel10k configuration
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
