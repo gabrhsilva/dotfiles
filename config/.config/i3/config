@@ -226,8 +226,24 @@ client.background       #F8F8F2
 # Display setup
 exec --no-startup-id xrandr --output HDMI-2 --auto --right-of eDP-1
 
-# Screenshot
-bindsym $mod+Shift+s exec "maim -s | xclip -selection clipboard -t image/png"
-
 # Lock screen
 bindsym $mod+ctrl+l exec --no-startup-id i3lock
+
+# Screenshot 
+# Full screen
+bindsym Print exec --no-startup-id maim "$HOME/Pictures/$(date +'%Y-%m-%d_%H-%M-%S').png"
+
+# Active window
+bindsym $mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "$HOME/Pictures/$(date +'%Y-%m-%d_%H-%M-%S').png"
+
+# Selection
+bindsym Shift+Print exec --no-startup-id maim --select "$HOME/Pictures/$(date +'%Y-%m-%d_%H-%M-%S').png"
+
+# Clipboard - Full screen
+bindsym Ctrl+Print exec --no-startup-id maim | xclip -selection clipboard -t image/png
+
+# Clipboard - Active window
+bindsym Ctrl+$mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) | xclip -selection clipboard -t image/png
+
+# Clipboard - Selection
+bindsym Ctrl+Shift+Print exec --no-startup-id maim --select | xclip -selection clipboard -t image/png
