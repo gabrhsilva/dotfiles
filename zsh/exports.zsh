@@ -1,6 +1,12 @@
 # Path to Oh My Zsh installation
 export ZSH="$HOME/.oh-my-zsh"
 
-# NVM (Arch Linux: installed via AUR package nvm)
+# NVM
 export NVM_DIR="$HOME/.nvm"
-[ -s "/usr/share/nvm/init-nvm.sh" ] && source "/usr/share/nvm/init-nvm.sh"
+if [ -s "/usr/share/nvm/init-nvm.sh" ]; then
+    # Arch: nvm instalado via AUR (pacote nvm)
+    source "/usr/share/nvm/init-nvm.sh"
+elif [ -s "$NVM_DIR/nvm.sh" ]; then
+    # Debian e outros: nvm instalado via curl (~/.nvm)
+    source "$NVM_DIR/nvm.sh"
+fi
