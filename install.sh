@@ -21,7 +21,6 @@ detect_distro() {
     case "$ID" in
       arch|manjaro|endeavouros) DISTRO="arch" ;;
       debian|ubuntu|pop|linuxmint) DISTRO="debian" ;;
-      fedora|rhel|centos) DISTRO="fedora" ;;
       *) DISTRO="unknown" ;;
     esac
   else
@@ -41,9 +40,6 @@ pkg_install() {
     debian)
       sudo apt-get install -y "$@"
       ;;
-    fedora)
-      sudo dnf install -y "$@"
-      ;;
     *)
       warn "Distro não suportada — pulando pacotes"
       ;;
@@ -53,13 +49,10 @@ pkg_install() {
 get_packages() {
   case "$DISTRO" in
     arch)
-      echo "zsh stow kitty i3-wm i3status picom feh neovim emacs ttf-jetbrains-mono-nerd eza bat ripgrep fd docker docker-compose"
+      echo "zsh stow kitty i3-wm i3status picom feh neovim emacs ttf-jetbrains-mono-nerd eza bat ripgrep fd docker docker-compose dex xdotool maim xclip xss-lock i3lock network-manager-applet dmenu"
       ;;
     debian)
-      echo "zsh stow kitty i3 i3status picom feh neovim emacs fonts-jetbrains-mono eza bat ripgrep fd-find docker.io docker-compose"
-      ;;
-    fedora)
-      echo "zsh stow kitty i3 i3status picom feh neovim emacs jetbrains-mono-fonts eza bat ripgrep fd-find docker docker-compose"
+      echo "zsh stow kitty i3 i3status picom feh neovim emacs fonts-jetbrains-mono eza bat ripgrep fd-find docker.io docker-compose dex xdotool maim xclip xss-lock i3lock network-manager-gnome suckless-tools"
       ;;
   esac
 }
