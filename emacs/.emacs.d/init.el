@@ -25,12 +25,12 @@
 (defvar my-packages '(org ; For outlining. It's bundled with Emacs, but I'm using the latest version. https://orgmode.org/
                       flx ; For fuzzy-completion in vertico. https://github.com/lewang/flx
                       rainbow-delimiters ; Highlight parentheses in rainbow colors. https://github.com/Fanael/rainbow-delimiters
-		                  magit ; A mode for committing to git repositories and viewing Git history. https://github.com/magit/magit
-		                  vertico ; Nicely show menu completions. https://github.com/minad/vertico
-		                  autothemer ; Useful for theme development. https://github.com/jasonm23/autothemer
-		                  copilot ; An Emacs plugin for GitHub Copilot. https://github.com/copilot-emacs/copilot.el
-		                  highlight-indent-guides ; An emacs plugin for guide identation. https://github.com/DarthFennec/highlight-indent-guides
-		                  rainbow-mode ; Colorize color names in buffers. https://elpa.gnu.org/packages/rainbow-mode.html
+		              magit ; A mode for committing to git repositories and viewing Git history. https://github.com/magit/magit
+		              vertico ; Nicely show menu completions. https://github.com/minad/vertico
+		              autothemer ; Useful for theme development. https://github.com/jasonm23/autothemer
+		              copilot ; An Emacs plugin for GitHub Copilot. https://github.com/copilot-emacs/copilot.el
+		              highlight-indent-guides ; An emacs plugin for guide identation. https://github.com/DarthFennec/highlight-indent-guides
+		              rainbow-mode ; Colorize color names in buffers. https://elpa.gnu.org/packages/rainbow-mode.html
                       pdf-tools ; For reading pdf in Emacs, better than doc-view. https://elpa.nongnu.org/nongnu/pdf-tools.html
 					  ))
 
