@@ -25,20 +25,20 @@
 (defvar my-packages '(org ; For outlining. It's bundled with Emacs, but I'm using the latest version. https://orgmode.org/
                       flx ; For fuzzy-completion in vertico. https://github.com/lewang/flx
                       rainbow-delimiters ; Highlight parentheses in rainbow colors. https://github.com/Fanael/rainbow-delimiters
-		      magit ; A mode for committing to git repositories and viewing Git history. https://github.com/magit/magit
-		      vertico ; Nicely show menu completions. https://github.com/minad/vertico
-		      autothemer ; Useful for theme development. https://github.com/jasonm23/autothemer
-		      copilot ; An Emacs plugin for GitHub Copilot. https://github.com/copilot-emacs/copilot.el
-		      highlight-indent-guides ; An emacs plugin for guide identation. https://github.com/DarthFennec/highlight-indent-guides
-		      rainbow-mode ; Colorize color names in buffers. https://elpa.gnu.org/packages/rainbow-mode.html
-              pdf-tools ; For reading pdf in Emacs, better than doc-view. https://elpa.nongnu.org/nongnu/pdf-tools.html
+		                  magit ; A mode for committing to git repositories and viewing Git history. https://github.com/magit/magit
+		                  vertico ; Nicely show menu completions. https://github.com/minad/vertico
+		                  autothemer ; Useful for theme development. https://github.com/jasonm23/autothemer
+		                  copilot ; An Emacs plugin for GitHub Copilot. https://github.com/copilot-emacs/copilot.el
+		                  highlight-indent-guides ; An emacs plugin for guide identation. https://github.com/DarthFennec/highlight-indent-guides
+		                  rainbow-mode ; Colorize color names in buffers. https://elpa.gnu.org/packages/rainbow-mode.html
+                      pdf-tools ; For reading pdf in Emacs, better than doc-view. https://elpa.nongnu.org/nongnu/pdf-tools.html
 					  ))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
     (package-install p)))
 
-(setq papckage-install-upgrade-built-in t)
+(setq package-install-upgrade-built-in t)
 
 ;;; Customization
 ;; backups
@@ -52,6 +52,9 @@
 ;; org
 
 ;; copilot
+
+;; vertico
+(vertico-mode 1)
 
 ;; mode line
 
@@ -84,7 +87,6 @@
 ;; fonts
 ;; https://github.com/be5invis/Iosevka/blob/v33.1.0/doc/PACKAGE-LIST.md
 ;; iosevka default
-(set-frame-font "Iosevka-14" nil t)
 (set-face-attribute 'default nil :font "Iosevka-14")
 (set-face-attribute 'font-lock-keyword-face nil :font "Iosevka Bold")
 (set-face-attribute 'font-lock-variable-name-face nil :font "Iosevka SemiBold")
@@ -109,10 +111,6 @@
 (global-tab-line-mode 0) 
 (setq tab-bar-close-button-show nil)
 (setq ring-bell-function 'ignore)
-(setq modus-themes-mixed-fonts t)
-(setq modus-themes-bold-constructs t)
-(setq modus-themes-italic-constructs t)
-(setq visual-mode-line 1)
 
 ;; backups
 (setq auto-save-default t)
